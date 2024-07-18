@@ -1,0 +1,28 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: bikranta312
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: lib
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: lib-mg-sys
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-south-1
+
+functions:
+  hello:
+    handler: /project/src/handlers/giveBookDetails.handler
+    events:
+      - httpApi:
+          path: /book
+          method: POST 
+  hi:
+    handler: /project/src/handlers/getBookDetails.handler
+    events:
+      - httpApi:
+          path: /book/{bookName}
+          method: GET
